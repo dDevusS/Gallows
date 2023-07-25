@@ -54,7 +54,7 @@ public class Game {
 	public static void doPlayersTurn(String[][]arraySecretWord, String playersLetter, List<String> listOfUsedLetter) {
 		
 		switch (Utils.isCorrectLetter(playersLetter, arraySecretWord, listOfUsedLetter)) {
-		case 4: 
+		case "bingo": 
 			listOfUsedLetter.add(playersLetter);
 			for (int index=0; index<arraySecretWord[0].length; index++) {
 				if(playersLetter.equals(arraySecretWord[0][index])) {
@@ -63,13 +63,13 @@ public class Game {
 			}
 			commentary="Есть такая буква!";
 			break;
-		case 3:
+		case "missed":
 			commentary="Такой буквы здесь нет.";
 			countAttempt--;
 			listOfUsedLetter.add(playersLetter);
 			break;
-		case 2: commentary="Вы уже вводили эту букву."; break;
-		case 1: commentary="Вы должны ввести только одну кириллическую букву."; break;
+		case "isUsed": commentary="Вы уже вводили эту букву."; break;
+		case "incorrect": commentary="Вы должны ввести только одну кириллическую букву."; break;
 		}
 	}
 }
