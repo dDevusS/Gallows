@@ -13,7 +13,8 @@ public class Main {
 			switch (Utils.scanner.nextLine().toUpperCase()) {
 			case "Н": Game.playGame(); break;
 			case "В": System.out.print("Возвращайтесь еще!"); System.exit(0); break;
-			default:  System.out.println("Вы ввели неверную команду.");				
+			default:  System.out.println("Вы ввели неверную команду. Нажмите любую клавишу...");
+				  String incorrectCommand=Utils.scanner.nextLine();				
 			}
 		}
 	}	
