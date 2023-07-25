@@ -25,22 +25,18 @@ public class Game {
 			Utils.doVisualisation(arraySecretWord, listOfUsedLetter);
 			System.out.println("\nПоздравляю! Вы отгадали слово "+word+".\n"
 							 + "Чтобы продолжить нажмите любую клвавишу...");
-			String anyKey=Utils.scanner.nextLine();
-			
+			String anyKey=Utils.scanner.nextLine();	
 		}
 		else if(checkStatusGame(arraySecretWord)==1) {
 			Utils.doVisualisation(arraySecretWord, listOfUsedLetter);
 			System.out.println("\nК сожалению, у вас закончились попытки и вы не смогли отгадать слово "+word+".\n"
 					         + "Чтобы продолжить нажмите любую клвавишу...");
 			String anyKey=Utils.scanner.nextLine();
-		}
-		
+		}		
 	}
 	
-	public static int checkStatusGame(String[][] arraySecretWord) {
-		
-		//0-victory; 1-attempts are over; 2-in progress. 
-		
+	public static int checkStatusGame(String[][] arraySecretWord) {		
+		//0-victory; 1-attempts are over; 2-in progress. 		
 		int status=2;
 		if (Arrays.equals(arraySecretWord[0], arraySecretWord[1])) {
 			status=0;
@@ -51,8 +47,7 @@ public class Game {
 		return status;
 	}
 	
-	public static void doPlayersTurn(String[][]arraySecretWord, String playersLetter, List<String> listOfUsedLetter) {
-		
+	public static void doPlayersTurn(String[][]arraySecretWord, String playersLetter, List<String> listOfUsedLetter) {		
 		switch (Utils.isCorrectLetter(playersLetter, arraySecretWord, listOfUsedLetter)) {
 		case "bingo": 
 			listOfUsedLetter.add(playersLetter);

@@ -1,25 +1,23 @@
 
 
 public class Gallows {
-
 	
-	public static void makeGallows(Integer countAttempt) {
-	
+	public static void makeGallows(Integer countAttempt) {	
+		
 		switch (countAttempt) {
 		case 6:
 			System.out.println("________________\n"
-				             + "||          |\n"
+				         	 + "||          |\n"
 				             + "||\n"
 				             + "||\n"
 				             + "||\n"
 				             + "||\n"
 				             + "||\n"
 				             + "||");
-			break;
-		
+			break;	
 		case 5:
 			System.out.println("________________\n"
-				             + "||          |\n"
+				         	 + "||          |\n"
 				             + "||          0\n"
 				             + "||\n"
 				             + "||\n"
@@ -29,7 +27,7 @@ public class Gallows {
 			break;
 		case 4:
 			System.out.println("________________\n"
-				             + "||          |\n"
+				         	 + "||          |\n"
 				             + "||          0\n"
 				             + "||          |\n"
 				             + "||\n"
@@ -39,7 +37,7 @@ public class Gallows {
 			break;
 		case 3:
 			System.out.println("________________\n"
-				             + "||          |\n"
+				         	 + "||          |\n"
 				             + "||          0\n"
 				             + "||         /|\n"
 				             + "||\n"
@@ -49,7 +47,7 @@ public class Gallows {
 			break;
 		case 2:
 			System.out.println("________________\n"
-				             + "||          |\n"
+				         	 + "||          |\n"
 				             + "||          0\n"
 				             + "||         /|\\\n"
 				             + "||\n"
@@ -59,7 +57,7 @@ public class Gallows {
 			break;
 		case 1:
 			System.out.println("________________\n"
-				             + "||          |\n"
+				         	 + "||          |\n"
 				             + "||          0\n"
 				             + "||         /|\\\n"
 				             + "||         /\n"
@@ -69,17 +67,14 @@ public class Gallows {
 			break;
 		case 0:
 			System.out.println("________________\n"
-				             + "||          |\n"
+				         	 + "||          |\n"
 				             + "||          0\n"
 				             + "||         /|\\\n"
 				             + "||         / \\\n"
 				             + "||\n"
 				             + "||\n"
 				             + "||");
-			break;
-			
-			
+			break;		
 		}
-		
 	}
 }

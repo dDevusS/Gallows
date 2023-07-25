@@ -10,15 +10,14 @@ public class Utils {
 	
 	public static Scanner scanner=new Scanner(System.in);
 	
-	public static String getWord() {
-		
+	public static String getWord() {	
 		File fileOfWords=new File("src"+File.separator+"Words");
 		String secretWord=null;
 		try {
 			Scanner fileReader=new Scanner(fileOfWords);
 			List<String> listOfWords=new ArrayList<>();
-	        String word=fileReader.nextLine();
-	       
+	        String word=fileReader.nextLine();       
+	        
 	        while(true) {
 	        	listOfWords.add(word);
 	        	if(!fileReader.hasNextLine()) {break;}
@@ -26,20 +25,19 @@ public class Utils {
 	        
 	        Random random=new Random();
 	        secretWord =listOfWords.get(random.nextInt(listOfWords.size()));
-	        fileReader.close();
-			
+	        fileReader.close();			
 		} 		
 		catch (FileNotFoundException e) {
 			System.out.print("File Words.TXT not found!");
-			String error=Utils.scanner.nextLine();
+			Scanner in=new Scanner(System.in);
+			String worning=in.nextLine();
+			in.close();
 			System.exit(0);
-		}
-		
+		}	
 		String[] temp=secretWord.split("/");
 		Game.word=temp[0].toUpperCase();
 		Game.question=temp[1];
-		return temp[0].toUpperCase();
-		
+		return temp[0].toUpperCase();		
 	}
 
 	public static String[][] doArraySecretWord(String secretWord) {
@@ -48,11 +46,10 @@ public class Utils {
 			arraySecretWord[0][indexOfLetter]=secretWord.charAt(indexOfLetter)+"";
 			arraySecretWord[1][indexOfLetter]="_";
 		}
-		return arraySecretWord;
-		
+		return arraySecretWord;		
 	}	
 
-	public static String getFieldOfSecretWord(String[][] arraySecretWord) {
+	private static String getFieldOfSecretWord(String[][] arraySecretWord) {
 		String word="";
 		for (String letter : arraySecretWord[1]) {
 			word+=letter+" ";
@@ -72,22 +69,8 @@ public class Utils {
 		System.out.println("\n\n"+Game.commentary+"\n");
 	}
 	
-	public static String isCorrectLetter(String playerLetter, String[][] arraySecretWord, List<String> listOfUsedLetter) {
-		
+	public static String isCorrectLetter(String playerLetter, String[][] arraySecretWord, List<String> listOfUsedLetter) {	
 		String markOfCorrect;
-		
-		boolean isLetter=false;  //Проверка на допустимые символы
-		String stringOfCorrectLetter="А Б В Г Д Е Ё Ж З И Й К Л М Н О П Р С Т У Ф Х Ц Ч Ш Щ Ъ Ы Ь Э Ю Я";
-		String[] listOfCorrectLetter=stringOfCorrectLetter.split(" ");
-		for (String correctLetter : listOfCorrectLetter) {
-			if(playerLetter.equals(correctLetter)) {
-				isLetter=true; break;}
-		}
-		
-		boolean isUsedLetter=false;   //Проверка на уже введеные буквы
-		for (String usedLetter : listOfUsedLetter) {
-			if (usedLetter.equals(playerLetter)) {isUsedLetter=true; break;}
-		}
 		
 		boolean isCorrectLetter=false;	//Проверка на правильно угаданную букву	
 		for (int index=0; index<arraySecretWord[0].length; index++) {
@@ -97,19 +80,36 @@ public class Utils {
 			}
 		}
 		
-		if (isLetter&&!isUsedLetter&&isCorrectLetter){
+		if (isLetter(playerLetter)&&!isUsedLetter(playerLetter, listOfUsedLetter)&&isCorrectLetter){
 			return markOfCorrect="bingo"; //попадание
 		}
-		else if (isLetter&&!isUsedLetter&&!isCorrectLetter) {
+		else if (isLetter(playerLetter)&&!isUsedLetter(playerLetter, listOfUsedLetter)&&!isCorrectLetter) {
 			return markOfCorrect="missed"; //мимо
 		}
-		else if (isLetter&&isUsedLetter) {
+		else if (isLetter(playerLetter)&&isUsedLetter(playerLetter, listOfUsedLetter)) {
 			return markOfCorrect="isUsed"; //уже было
 		}
 		else {
 			return markOfCorrect="incorrect"; //Неверный символ
+		}	
+	}
+	
+	private static boolean isLetter(String playerLetter) {
+		boolean isLetter=false;  //Проверка на допустимые символы
+		String stringOfCorrectLetter="А Б В Г Д Е Ё Ж З И Й К Л М Н О П Р С Т У Ф Х Ц Ч Ш Щ Ъ Ы Ь Э Ю Я";
+		String[] listOfCorrectLetter=stringOfCorrectLetter.split(" ");
+		for (String correctLetter : listOfCorrectLetter) {
+			if(playerLetter.equals(correctLetter)) {
+				isLetter=true; break;}
 		}
-		
-		
+		return isLetter;
+	}
+	
+	private static boolean isUsedLetter(String playerLetter, List<String> listOfUsedLetter) {
+		boolean isUsedLetter=false;   //Проверка на уже введеные буквы
+		for (String usedLetter : listOfUsedLetter) {
+			if (usedLetter.equals(playerLetter)) {isUsedLetter=true;}
+		}
+		return isUsedLetter;
 	}
 }

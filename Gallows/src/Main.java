@@ -1,8 +1,7 @@
 
 public class Main {
 
-	public static void main(String[] args) {
-		
+	public static void main(String[] args) {				
 		while(true) {
 			System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n"
 							   +"Виселица.\n\n"	
@@ -14,7 +13,7 @@ public class Main {
 			case "Н": Game.playGame(); break;
 			case "В": System.out.print("Возвращайтесь еще!"); System.exit(0); break;
 			default:  System.out.println("Вы ввели неверную команду. Нажмите любую клавишу...");
-				  String incorrectCommand=Utils.scanner.nextLine();				
+					  String incorrectCommand=Utils.scanner.nextLine();
 			}
 		}
 	}	
