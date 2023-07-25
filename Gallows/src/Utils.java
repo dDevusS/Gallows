@@ -31,9 +31,7 @@ public class Utils {
 		} 		
 		catch (FileNotFoundException e) {
 			System.out.print("File Words.TXT not found!");
-			Scanner in=new Scanner(System.in);
-			String worning=in.nextLine();
-			in.close();
+			String error=Utils.scanner.nextLine();
 			System.exit(0);
 		}
 		
@@ -88,7 +86,7 @@ public class Utils {
 		
 		boolean isUsedLetter=false;   //Проверка на уже введеные буквы
 		for (String usedLetter : listOfUsedLetter) {
-			if (usedLetter.equals(playerLetter)) {isUsedLetter=true;}
+			if (usedLetter.equals(playerLetter)) {isUsedLetter=true; break;}
 		}
 		
 		boolean isCorrectLetter=false;	//Проверка на правильно угаданную букву	
