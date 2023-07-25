@@ -74,9 +74,9 @@ public class Utils {
 		System.out.println("\n\n"+Game.commentary+"\n");
 	}
 	
-	public static Integer isCorrectLetter(String playerLetter, String[][] arraySecretWord, List<String> listOfUsedLetter) {
+	public static String isCorrectLetter(String playerLetter, String[][] arraySecretWord, List<String> listOfUsedLetter) {
 		
-		int markOfCorrect;
+		String markOfCorrect;
 		
 		boolean isLetter=false;  //Проверка на допустимые символы
 		String stringOfCorrectLetter="А Б В Г Д Е Ё Ж З И Й К Л М Н О П Р С Т У Ф Х Ц Ч Ш Щ Ъ Ы Ь Э Ю Я";
@@ -100,16 +100,16 @@ public class Utils {
 		}
 		
 		if (isLetter&&!isUsedLetter&&isCorrectLetter){
-			return markOfCorrect=4; //попадание
+			return markOfCorrect="bingo"; //попадание
 		}
 		else if (isLetter&&!isUsedLetter&&!isCorrectLetter) {
-			return markOfCorrect=3; //мимо
+			return markOfCorrect="missed"; //мимо
 		}
 		else if (isLetter&&isUsedLetter) {
-			return markOfCorrect=2; //уже было
+			return markOfCorrect="isUsed"; //уже было
 		}
 		else {
-			return markOfCorrect=1; //Неверный символ
+			return markOfCorrect="incorrect"; //Неверный символ
 		}
 		
 		
