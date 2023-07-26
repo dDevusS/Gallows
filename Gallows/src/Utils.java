@@ -11,7 +11,7 @@ public class Utils {
 	public static Scanner scanner=new Scanner(System.in);
 	
 	public static String getWord() {	
-		File fileOfWords=new File("Gallows"+File.separator+"src"+File.separator+"Words");
+		File fileOfWords=new File("src"+File.separator+"Words");
 		String secretWord=null;
 		try {
 			Scanner fileReader=new Scanner(fileOfWords);
