@@ -11,7 +11,7 @@ public class Utils {
 	public static Scanner scanner=new Scanner(System.in);
 	
 	public static String getWord() {	
-		File fileOfWords=new File("src"+File.separator+"Words");
+		File fileOfWords=new File("src"+File.separator+"Words.txt");
 		String secretWord=null;
 		try {
 			Scanner fileReader=new Scanner(fileOfWords);
@@ -60,7 +60,7 @@ public class Utils {
 	public static void doVisualisation(String[][] arraySecretWord, List<String> listOfUsedLetter) {
 		System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
 		Gallows.makeGallows(Game.countAttempt);
-		System.out.println("Загаданное слово: "+Utils.getFieldOfSecretWord(arraySecretWord)+"      Осталось"+Game.countAttempt+" попыток.");
+		System.out.println("Загаданное слово: "+Utils.getFieldOfSecretWord(arraySecretWord)+"      Осталось "+Game.countAttempt+" попыток.");
 		System.out.println(Game.question);
 		System.out.print("Вы вводили бувы: ");
 		for(String usedLetter : listOfUsedLetter) {
