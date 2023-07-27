@@ -28,10 +28,8 @@ public class Utils {
 	        fileReader.close();			
 		} 		
 		catch (FileNotFoundException e) {
-			System.out.print("File Words.TXT not found!");
-			Scanner in=new Scanner(System.in);
-			String worning=in.nextLine();
-			in.close();
+			System.out.print("File Words.txt not found!");
+			scanner.nextLine();
 			System.exit(0);
 		}	
 		String[] temp=secretWord.split("/");
@@ -57,10 +55,10 @@ public class Utils {
 		return word;
 	}
 	
-	public static void doVisualisation(String[][] arraySecretWord, List<String> listOfUsedLetter) {
+	public static void doVisualisation(String[][] arraySecretWord, List<String> listOfUsedLetter, Integer countAttempt) {
 		System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
-		Gallows.makeGallows(Game.countAttempt);
-		System.out.println("Загаданное слово: "+Utils.getFieldOfSecretWord(arraySecretWord)+"      Осталось "+Game.countAttempt+" попыток.");
+		Gallows.makeGallows(countAttempt);
+		System.out.println("Загаданное слово: "+Utils.getFieldOfSecretWord(arraySecretWord)+"      Осталось "+countAttempt+" попыток.");
 		System.out.println(Game.question);
 		System.out.print("Вы вводили бувы: ");
 		for(String usedLetter : listOfUsedLetter) {
@@ -69,9 +67,7 @@ public class Utils {
 		System.out.println("\n\n"+Game.commentary+"\n");
 	}
 	
-	public static String isCorrectLetter(String playerLetter, String[][] arraySecretWord, List<String> listOfUsedLetter) {	
-		String markOfCorrect;
-		
+	public static String isCorrectLetter(String playerLetter, String[][] arraySecretWord, List<String> listOfUsedLetter) {		
 		boolean isCorrectLetter=false;	//Проверка на правильно угаданную букву	
 		for (int index=0; index<arraySecretWord[0].length; index++) {
 			if(playerLetter.equals(arraySecretWord[0][index])) {
@@ -80,17 +76,19 @@ public class Utils {
 			}
 		}
 		
-		if (isLetter(playerLetter)&&!isUsedLetter(playerLetter, listOfUsedLetter)&&isCorrectLetter){
-			return markOfCorrect="bingo"; //попадание
-		}
-		else if (isLetter(playerLetter)&&!isUsedLetter(playerLetter, listOfUsedLetter)&&!isCorrectLetter) {
-			return markOfCorrect="missed"; //мимо
-		}
-		else if (isLetter(playerLetter)&&isUsedLetter(playerLetter, listOfUsedLetter)) {
-			return markOfCorrect="isUsed"; //уже было
+		if (isLetter(playerLetter)) {
+			if (!isUsedLetter(playerLetter, listOfUsedLetter)&&isCorrectLetter){
+				return "bingo";
+			}
+			else if (!isUsedLetter(playerLetter, listOfUsedLetter)&&!isCorrectLetter) {
+				return "missed";
+			}
+			else {
+				return "isUsed";
+			}
 		}
 		else {
-			return markOfCorrect="incorrect"; //Неверный символ
+			return "incorrect";
 		}	
 	}
 	
@@ -111,5 +109,10 @@ public class Utils {
 			if (usedLetter.equals(playerLetter)) {isUsedLetter=true;}
 		}
 		return isUsedLetter;
+	}
+
+	public static void waitingForAnyKey() {
+		String anyKey=scanner.nextLine();
+		anyKey=null;
 	}
 }

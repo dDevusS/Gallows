@@ -5,10 +5,10 @@ import java.util.List;
 
 public class Game {
 	
-	public static int countAttempt;   //Счетчик попыток
 	public static String question;    //Подсказка	
 	public static String word;		  //Загаданное слово
 	static String commentary="";
+	private static int countAttempt;   //Счетчик попыток
 	
  	public static void playGame() {
 		String[][] arraySecretWord=Utils.doArraySecretWord(Utils.getWord());
@@ -16,22 +16,22 @@ public class Game {
 		List<String> listOfUsedLetter=new ArrayList<>();
 
 		while(checkStatusGame(arraySecretWord)==2) {
-			Utils.doVisualisation(arraySecretWord, listOfUsedLetter);
+			Utils.doVisualisation(arraySecretWord, listOfUsedLetter, countAttempt);
 			System.out.println("Введите одну букву: ");
 			String playersLetter=Utils.scanner.nextLine().toUpperCase();
 			doPlayersTurn(arraySecretWord, playersLetter, listOfUsedLetter);
 		}
 		if(checkStatusGame(arraySecretWord)==0) {
-			Utils.doVisualisation(arraySecretWord, listOfUsedLetter);
+			Utils.doVisualisation(arraySecretWord, listOfUsedLetter, countAttempt);
 			System.out.println("\nПоздравляю! Вы отгадали слово "+word+".\n"
 							 + "Чтобы продолжить нажмите любую клвавишу...");
-			String anyKey=Utils.scanner.nextLine();	
+			Utils.waitingForAnyKey();	
 		}
 		else if(checkStatusGame(arraySecretWord)==1) {
-			Utils.doVisualisation(arraySecretWord, listOfUsedLetter);
+			Utils.doVisualisation(arraySecretWord, listOfUsedLetter, countAttempt);
 			System.out.println("\nК сожалению, у вас закончились попытки и вы не смогли отгадать слово "+word+".\n"
 					         + "Чтобы продолжить нажмите любую клвавишу...");
-			String anyKey=Utils.scanner.nextLine();
+			Utils.waitingForAnyKey();
 		}		
 	}
 	
