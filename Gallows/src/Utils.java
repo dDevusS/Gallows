@@ -33,80 +33,69 @@ public class Utils {
 			System.exit(0);
 		}	
 		String[] temp=secretWord.split("/");
-		Game.word=temp[0].toUpperCase();
 		Game.question=temp[1];
-		return temp[0].toUpperCase();		
-	}
-
-	public static String[][] doArraySecretWord(String secretWord) {
-		String[][] arraySecretWord=new String[2][secretWord.length()];
-		for (int indexOfLetter = 0; indexOfLetter < arraySecretWord[0].length; indexOfLetter++) {
-			arraySecretWord[0][indexOfLetter]=secretWord.charAt(indexOfLetter)+"";
-			arraySecretWord[1][indexOfLetter]="_";
-		}
-		return arraySecretWord;		
-	}	
-
-	private static String getFieldOfSecretWord(String[][] arraySecretWord) {
-		String word="";
-		for (String letter : arraySecretWord[1]) {
-			word+=letter+" ";
-		}
-		return word;
+		return temp[0].toUpperCase();
 	}
 	
-	public static void doVisualisation(String[][] arraySecretWord, List<String> listOfUsedLetter, Integer countAttempt) {
+	public static StringBuilder doHiddenWord(String secretWord) { 
+		StringBuilder hiddenWord=new StringBuilder();
+		for (int indexLetter=0; indexLetter<secretWord.length(); indexLetter++) {
+			hiddenWord.append("_");
+		}
+		return hiddenWord;
+	  }
+
+	private static String getFieldOfSecretWord(StringBuilder hiddenWord) {
+		StringBuilder word=new StringBuilder();
+		for (int indexLetter=0; indexLetter<hiddenWord.length(); indexLetter++) {
+			word.append(hiddenWord.charAt(indexLetter)+" ");
+		}
+		return word.toString();
+	}
+	
+	public static void doVisualisation(StringBuilder hiddenWord, StringBuilder listOfUsedLetter, Integer countAttempt) {
 		System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
 		Gallows.makeGallows(countAttempt);
-		System.out.println("Загаданное слово: "+Utils.getFieldOfSecretWord(arraySecretWord)+"      Осталось "+countAttempt+" попыток.");
+		System.out.println("Загаданное слово: "+Utils.getFieldOfSecretWord(hiddenWord)+"      Осталось "+countAttempt+" попыток.");
 		System.out.println(Game.question);
-		System.out.print("Вы вводили бувы: ");
-		for(String usedLetter : listOfUsedLetter) {
-			System.out.print(usedLetter+" ");
-		}
+		System.out.print("Вы вводили бувы: "+listOfUsedLetter.toString());
 		System.out.println("\n\n"+Game.commentary+"\n");
 	}
 	
-	public static String isCorrectLetter(String playerLetter, String[][] arraySecretWord, List<String> listOfUsedLetter) {		
-		boolean isCorrectLetter=false;	//Проверка на правильно угаданную букву	
-		for (int index=0; index<arraySecretWord[0].length; index++) {
-			if(playerLetter.equals(arraySecretWord[0][index])) {
-				arraySecretWord[1][index]=playerLetter;
-				isCorrectLetter=true;
+	public static String isCorrectLetter(String playersLetter, String secretWord, StringBuilder listOfUsedLetter) {		
+		if(!isLetter(playersLetter)) {
+			return "incorrect";
 			}
+		boolean isCorrectLetter=false;	//Проверка на правильно угаданную букву	
+		for (int indexLetter=0; indexLetter<secretWord.length(); indexLetter++) {
+			if (secretWord.charAt(indexLetter)==playersLetter.charAt(0)) {isCorrectLetter=true;}
 		}
 		
-		if (isLetter(playerLetter)) {
-			if (!isUsedLetter(playerLetter, listOfUsedLetter)&&isCorrectLetter){
+		if (!isUsedLetter(playersLetter.charAt(0), listOfUsedLetter)) {
+			if (isCorrectLetter) {
 				return "bingo";
 			}
-			else if (!isUsedLetter(playerLetter, listOfUsedLetter)&&!isCorrectLetter) {
+			else {		
 				return "missed";
-			}
-			else {
-				return "isUsed";
-			}
+			}	
 		}
-		else {
-			return "incorrect";
-		}	
+		else {	
+			return "isUsed";
+		}
 	}
 	
 	private static boolean isLetter(String playerLetter) {
-		boolean isLetter=false;  //Проверка на допустимые символы
-		String stringOfCorrectLetter="А Б В Г Д Е Ё Ж З И Й К Л М Н О П Р С Т У Ф Х Ц Ч Ш Щ Ъ Ы Ь Э Ю Я";
-		String[] listOfCorrectLetter=stringOfCorrectLetter.split(" ");
-		for (String correctLetter : listOfCorrectLetter) {
-			if(playerLetter.equals(correctLetter)) {
-				isLetter=true; break;}
+		boolean isLetter=false;
+		if (playerLetter.length()!=0&&playerLetter.charAt(0)>='А'&&playerLetter.charAt(0)<='Я') {
+					return isLetter=true;
 		}
 		return isLetter;
 	}
 	
-	private static boolean isUsedLetter(String playerLetter, List<String> listOfUsedLetter) {
+	private static boolean isUsedLetter(char playersChar, StringBuilder listOfUsedLetter) {
 		boolean isUsedLetter=false;   //Проверка на уже введеные буквы
-		for (String usedLetter : listOfUsedLetter) {
-			if (usedLetter.equals(playerLetter)) {isUsedLetter=true;}
+		for (int indexLetter=0; indexLetter<listOfUsedLetter.length(); indexLetter++) {
+			if (playersChar==listOfUsedLetter.charAt(indexLetter)) {isUsedLetter=true; break;}
 		}
 		return isUsedLetter;
 	}
