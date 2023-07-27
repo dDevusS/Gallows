@@ -68,7 +68,7 @@ public class Utils {
 			}
 		boolean isCorrectLetter=false;	//Проверка на правильно угаданную букву	
 		for (int indexLetter=0; indexLetter<secretWord.length(); indexLetter++) {
-			if (secretWord.charAt(indexLetter)==playersLetter.charAt(0)) {isCorrectLetter=true;}
+			if (secretWord.charAt(indexLetter)==playersLetter.charAt(0)) {isCorrectLetter=true; break;}
 		}
 		
 		if (!isUsedLetter(playersLetter.charAt(0), listOfUsedLetter)) {
