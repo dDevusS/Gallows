@@ -25,13 +25,13 @@ public class Game {
 			Utils.doVisualisation(arraySecretWord, listOfUsedLetter, countAttempt);
 			System.out.println("\nПоздравляю! Вы отгадали слово "+word+".\n"
 							 + "Чтобы продолжить нажмите любую клвавишу...");
-			Utils.waitingForAnyKey();	
+			Utils.scanner.nextLine();	
 		}
 		else if(checkStatusGame(arraySecretWord)==1) {
 			Utils.doVisualisation(arraySecretWord, listOfUsedLetter, countAttempt);
 			System.out.println("\nК сожалению, у вас закончились попытки и вы не смогли отгадать слово "+word+".\n"
 					         + "Чтобы продолжить нажмите любую клвавишу...");
-			Utils.waitingForAnyKey();
+			Utils.scanner.nextLine();
 		}		
 	}
 	

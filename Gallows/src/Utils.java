@@ -110,9 +110,4 @@ public class Utils {
 		}
 		return isUsedLetter;
 	}
-
-	public static void waitingForAnyKey() {
-		String anyKey=scanner.nextLine();
-		anyKey=null;
-	}
 }
