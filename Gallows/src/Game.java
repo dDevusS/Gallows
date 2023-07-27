@@ -13,18 +13,18 @@ public class Game {
 		StringBuilder listOfUsedLetter=new StringBuilder(" ");
 
 		while(checkStatusGame(hiddenWord)==2) {
-			Utils.doVisualisation(hiddenWord, listOfUsedLetter, countAttempt);
+			Utils.doVisualisationGameProcess(hiddenWord, listOfUsedLetter, countAttempt);
 			System.out.println("Введите одну букву: ");
 			doPlayersTurn(hiddenWord, listOfUsedLetter, Utils.scanner.nextLine().toUpperCase());
 		}
 		if(checkStatusGame(hiddenWord)==0) {
-			Utils.doVisualisation(hiddenWord, listOfUsedLetter, countAttempt);
+			Utils.doVisualisationGameProcess(hiddenWord, listOfUsedLetter, countAttempt);
 			System.out.println("\nПоздравляю! Вы отгадали слово "+secretWord+".\n"
 							 + "Чтобы продолжить нажмите любую клвавишу...");
 			Utils.scanner.nextLine();	
 		}
 		else if(checkStatusGame(hiddenWord)==1) {
-			Utils.doVisualisation(hiddenWord, listOfUsedLetter, countAttempt);
+			Utils.doVisualisationGameProcess(hiddenWord, listOfUsedLetter, countAttempt);
 			System.out.println("\nК сожалению, у вас закончились попытки и вы не смогли отгадать слово "+secretWord+".\n"
 					         + "Чтобы продолжить нажмите любую клвавишу...");
 			Utils.scanner.nextLine();

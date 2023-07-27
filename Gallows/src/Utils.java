@@ -53,7 +53,7 @@ public class Utils {
 		return word.toString();
 	}
 	
-	public static void doVisualisation(StringBuilder hiddenWord, StringBuilder listOfUsedLetter, Integer countAttempt) {
+	public static void doVisualisationGameProcess(StringBuilder hiddenWord, StringBuilder listOfUsedLetter, Integer countAttempt) {
 		System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
 		Gallows.makeGallows(countAttempt);
 		System.out.println("Загаданное слово: "+Utils.getFieldOfSecretWord(hiddenWord)+"      Осталось "+countAttempt+" попыток.");
